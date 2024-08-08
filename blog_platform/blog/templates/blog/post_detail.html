@@ -1,0 +1,30 @@
+
+<h1>Blog Posts</h1>
+
+{% if posts.exists %}
+    {% for post in posts %}
+        <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <p>Published on {{ post.created_at }}</p>
+    {% endfor %}
+{% else %}
+    <p>No posts available.</p>
+{% endif %}
+
+
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+<p>Published on {{ post.created_at }}</p>
+
+<form action="{% url 'post_like' post.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">
+        {% if liked %}
+            Unlike
+        {% else %}
+            Like
+        {% endif %}
+    </button>
+</form>
+
+<p>{{ post.likes.count }} likes</p>

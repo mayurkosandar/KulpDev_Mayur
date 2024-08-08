@@ -1,0 +1,17 @@
+
+<h1>Blog Posts</h1>
+
+{% for post in posts %}
+    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.content|truncatewords:30 }}</p>
+    <p>Published on {{ post.created_at }}</p>
+
+    <form method="post" action="{% url 'change_status' post.pk %}">
+        {% csrf_token %}
+        <select name="status">
+            <option value="draft" {% if post.status == 'draft' %}selected{% endif %}>Draft</option>
+            <option value="published" {% if post.status == 'published' %}selected{% endif %}>Published</option>
+        </select>
+        <button type="submit">Change Status</button>
+    </form>
+{% endfor %}
