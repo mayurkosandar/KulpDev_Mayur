@@ -4,11 +4,12 @@
    ```sh
    git clone <repository-url>
    cd <repository-directory>
+
 Create a Virtual Environment
 
-sh
-Copy code
+```sh
 python -m venv venv
+  ```
 Activate the Virtual Environment:
 
 On Windows:
